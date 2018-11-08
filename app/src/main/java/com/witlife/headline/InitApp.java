@@ -33,12 +33,24 @@ public class InitApp extends MultiDexApplication {
             int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
             int currentMinute = calendar.get(Calendar.MINUTE);
 
-            int nightValue = nightStartHour * 60 + nightStartHour;
+
+            int nightValue = nightStartHour * 60 + nightStartMinute;
             int dayValue = dayStartHour * 60 + dayStartMinute;
             int currentValue = currentHour * 60 + currentMinute;
 
-            if (currentValue >= nightValue || currentValue <= dayValue){
+            if(currentValue >= nightValue || currentValue <= dayValue){
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                settingUtil.setIsNightMode(true);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                settingUtil.setIsNightMode(false);
+            } 
+        } else {
+            if(settingUtil.getIsNightMode()){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
             }
         }
     }
