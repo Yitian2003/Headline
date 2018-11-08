@@ -16,6 +16,9 @@ public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private BottomNavigationView bottom_navigation;
+    private static final int FRAGMENT_NEWS = 0;
+    private int position;
+    private NewsTabLayout newsTablayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +39,13 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationViewHelper.disableShifMode(bottom_navigation);
         setSupportActionBar(toolbar);
         bottom_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.action_news:
                         showFragment(FRAGMENT_NEWS);
-                        doubleClick(FRAGMENT_NEWS);
+                        //doubleClick(FRAGMENT_NEWS);
                         break;
                 }
                 return true;
@@ -54,11 +58,25 @@ public class MainActivity extends AppCompatActivity {
     private void showFragment(int index){
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         hideFragment(ft);
+        position = index;
+        switch (index){
+            case FRAGMENT_NEWS:
+                toolbar.setTitle("Headline");
+                if(newsTablayout == null){
+                    newsTablayout = NewsTabLayout.getInstance();
+                    ft.add(R.id.container, newsTablayout, NewsTabLayout.class.getName());
+                } else {
+                    ft.show(newsTablayout);
+                }
+                break;
+        }
+
+        ft.commit();
     }
 
     private void hideFragment(FragmentTransaction ft) {
-        if (newsTabLayout != null){
-            ft.hide(newsTabLayout);
+        if (newsTablayout != null){
+            ft.hide(newsTablayout);
         }
     }
 }

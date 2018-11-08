@@ -38,6 +38,30 @@ public class SettingUtil {
         return setting.getBoolean("nav_bar", false);
     }
 
+    public boolean getIsAutoNightMode() {
+        return setting.getBoolean("auto_nightMode", false);
+    }
+
+    public void setIsAutoNightMode(boolean flag){
+        setting.edit().putBoolean("auto_nightMode", flag).apply();
+    }
+
+    public String getNightStartHour() {
+        return setting.getString("night_startHour", "22");
+    }
+
+    public String getNightStartMinute() {
+        return setting.getString("night_startMinute", "00");
+    }
+
+    public String getDayStartHour() {
+        return setting.getString("day_startHour", "06");
+    }
+
+    public String getDayStartMinute() {
+        return setting.getString("day_startMinute", "00");
+    }
+
 
     private static class SettingsUtilInstance {
 
