@@ -5,12 +5,17 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.witlife.headline.Constant;
 import com.witlife.headline.R;
+import com.witlife.headline.database.dao.NewsChannelDao;
 import com.witlife.headline.module.base.BaseActivity;
+
+import java.time.Instant;
 
 public class NewsChannelActivity extends BaseActivity {
 
     private RecyclerView recyclerView;
+    private NewsChannelDao dao = new NewsChannelDao();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +27,7 @@ public class NewsChannelActivity extends BaseActivity {
     }
 
     private void initData() {
-
+        dao.query(Constant.NEWS_CHANNEL_ENABLE);
     }
 
     private void initView() {
