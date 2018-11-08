@@ -38,6 +38,10 @@ public class NewsTabLayout extends Fragment {
         return view;
     }
 
+    private void initData() {
+
+    }
+
     @Override
     public void onResume() {
         super.onResume();

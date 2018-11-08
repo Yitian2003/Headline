@@ -40,4 +40,8 @@ public class NewsChannelActivity extends BaseActivity {
         super.onStop();
         onSaveData();
     }
+
+    private void onSaveData() {
+
+    }
 }
