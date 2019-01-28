@@ -66,6 +66,14 @@ public class SettingUtil {
         return setting.getBoolean("auto_nightMode", false);
     }
 
+    public boolean getIsFirstTime() {
+        return setting.getBoolean("first_time", true);
+    }
+
+    public void setIsFirstTime(boolean flag) {
+        setting.edit().putBoolean("first_time", flag).apply();
+    }
+
 
     private static class SettingsUtilInstance {
 

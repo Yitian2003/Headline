@@ -1,6 +1,7 @@
 package com.witlife.headline.database.dao;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.witlife.headline.Constant;
@@ -9,6 +10,7 @@ import com.witlife.headline.InitApp;
 import com.witlife.headline.R;
 import com.witlife.headline.database.table.NewsChannelTable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NewsChannelDao {
@@ -41,7 +43,32 @@ public class NewsChannelDao {
     }
 
     public List<NewsChannelBean> query(int isEnable) {
-        db.query(NewsChannelTable.TABLENAME, null, NewsChannelTable.IS_ENABLE + "=?", new String[]{isEnable + ""}, null, null, null);
+       Cursor cursor = db.query(NewsChannelTable.TABLENAME, null, NewsChannelTable.IS_ENABLE + "=?", new String[]{isEnable + ""}, null, null, null);
+        ArrayList<NewsChannelBean> list = new ArrayList<>();
+        while (cursor.moveToNext()){
+            NewsChannelBean bean = new NewsChannelBean();
+            bean.setChannelId(cursor.getString(NewsChannelTable.ID_ID));
+            bean.setChannelName(cursor.getString(NewsChannelTable.ID_NAME));
+            bean.setIsEnable(cursor.getInt(NewsChannelTable.ID_ISENABLE));
+            bean.setPosition(cursor.getInt(NewsChannelTable.ID_POSITION));
+            list.add(bean);
+        }
+        cursor.close();
+        return list;
+    }
 
+    public List<NewsChannelBean> queryAll(){
+        Cursor cursor = db.query(NewsChannelTable.TABLENAME, null, null, null, null, null, null);
+        List<NewsChannelBean> list = new ArrayList<>();
+        while (cursor.moveToNext()){
+            NewsChannelBean bean = new NewsChannelBean();
+            bean.setChannelId(cursor.getString(NewsChannelTable.ID_ID));
+            bean.setChannelName(cursor.getString(NewsChannelTable.ID_NAME));
+            bean.setIsEnable(cursor.getInt(NewsChannelTable.ID_ISENABLE));
+            bean.setPosition(cursor.getInt(NewsChannelTable.ID_POSITION));
+            list.add(bean);
+        }
+        cursor.close();
+        return list;
     }
 }

@@ -14,13 +14,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.witlife.headline.R;
+import com.witlife.headline.module.base.BaseListFragment;
 import com.witlife.headline.module.news.channel.NewsChannelActivity;
 import com.witlife.headline.util.SettingUtil;
+
+import java.util.List;
 
 public class NewsTabLayout extends Fragment {
     private static NewsTabLayout instance = null;
     private ViewPager viewPager;
     private LinearLayout linearLayout;
+    private List<String> titleList;
+    private List<Fragment> fragmentList;
 
     public static NewsTabLayout getInstance(){
         if (instance == null){
@@ -62,5 +67,12 @@ public class NewsTabLayout extends Fragment {
         });
         linearLayout = view.findViewById(R.id.header_layout);
         linearLayout.setBackgroundColor(SettingUtil.getInstance().getColor());
+    }
+
+    public void onDoubleClick() {
+        if (titleList != null && titleList.size() > 0 && fragmentList != null && fragmentList.size() > 0){
+            int item = viewPager.getCurrentItem();
+            ((BaseListFragment)fragmentList.get(item)).onRefresh();
+        }
     }
 }

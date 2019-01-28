@@ -14,6 +14,7 @@ public class InitApp extends MultiDexApplication {
 
     @Override
     public void onCreate() {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         super.onCreate();
         appContext = getApplicationContext();
 

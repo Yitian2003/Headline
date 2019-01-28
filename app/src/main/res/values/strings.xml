@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Headline</string>
     <string name="title_item_drag" >Drag To Sort</string>
+    <string name="navigation_drawer_open">Open drawer</string>
+    <string name="navigation_drawer_close">Close Drawer</string>
+    <string name="double_click_exit" >Press Again To Exit</string>
 </resources>
