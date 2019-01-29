@@ -1,6 +1,7 @@
 package com.witlife.headline.module.base;
 
 import android.app.ActivityManager;
+import android.arch.lifecycle.Lifecycle;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -17,6 +18,9 @@ import com.afollestad.materialdialogs.color.CircleView;
 import com.r0adkll.slidr.Slidr;
 import com.r0adkll.slidr.model.SlidrConfig;
 import com.r0adkll.slidr.model.SlidrInterface;
+import com.uber.autodispose.AutoDispose;
+import com.uber.autodispose.AutoDisposeConverter;
+import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 import com.witlife.headline.Constant;
 import com.witlife.headline.util.SettingUtil;
 
@@ -60,7 +64,7 @@ public class BaseActivity extends AppCompatActivity {
         }
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             getWindow().setStatusBarColor((CircleView.shiftColorDown(color)));
-            ActivityManager.TaskDescription tDesc = new ActivityManager.TaskDescription("Title", BitmapFactory.decodeResource(getResources(), drawable), color);
+            ActivityManager.TaskDescription tDesc = new ActivityManager.TaskDescription("Headline", BitmapFactory.decodeResource(getResources(), drawable), color);
             setTaskDescription(tDesc);
             if (SettingUtil.getInstance().getNavBar()){
                 getWindow().setNavigationBarColor(CircleView.shiftColorDown(color));
@@ -109,5 +113,10 @@ public class BaseActivity extends AppCompatActivity {
             }).start();
         }
         super.onStop();
+    }
+
+    public <X>AutoDisposeConverter<X> bindAutoDispose(){
+        return AutoDispose.autoDisposable(AndroidLifecycleScopeProvider
+                .from(this, Lifecycle.Event.ON_DESTROY));
     }
 }

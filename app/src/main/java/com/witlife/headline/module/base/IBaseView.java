@@ -7,9 +7,9 @@ public interface IBaseView<T> {
 
     void onHideLoading();
 
-    void  onShowNewError();
+    void onShowNewError();
 
     void setPresenter(T presenter);
 
-    <x> AutoDisposeConverter<x> bindAutoDispose();
+    <X> AutoDisposeConverter<X> bindAutoDispose();
 }
