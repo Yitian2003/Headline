@@ -24,6 +24,8 @@ import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 import com.witlife.headline.Constant;
 import com.witlife.headline.util.SettingUtil;
 
+import io.reactivex.annotations.Nullable;
+
 public class BaseActivity extends AppCompatActivity {
 
     private int iconType = -1;
@@ -31,7 +33,7 @@ public class BaseActivity extends AppCompatActivity {
     private SlidrInterface slidrInterface;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.iconType = SettingUtil.getInstance().getCustomIconValue();
         this.mContext = this;

@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
+import com.witlife.headline.module.base.BaseActivity;
 import com.witlife.headline.module.news.NewsTabLayout;
 import com.witlife.headline.util.SettingUtil;
 import com.witlife.headline.widget.helper.BottomNavigationViewHelper;
@@ -29,7 +30,7 @@ import java.util.Set;
 
 import static com.witlife.headline.database.table.NewsChannelTable.POSITION;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String SELECT_ITEM = "bottomNavigationSelectItem";
     private Toolbar toolbar;
@@ -107,6 +108,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 });
         sequence.start();
 
+    }
+
+    @Override
+    protected void initSlidable() {
     }
 
     private void initView() {
